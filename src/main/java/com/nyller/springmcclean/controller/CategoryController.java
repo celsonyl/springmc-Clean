@@ -5,6 +5,7 @@ import com.nyller.springmcclean.controller.model.CategoryResponse;
 import com.nyller.springmcclean.translator.CategoryMapperImpl;
 import com.nyller.springmcclean.usecase.CreateCategoryUsecase;
 import com.nyller.springmcclean.usecase.GetAllCategoriesUsecase;
+import com.nyller.springmcclean.usecase.GetCategoryByIdUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class CategoryController {
     @Autowired
     private GetAllCategoriesUsecase getAllCategoriesUsecase;
 
+    @Autowired
+    private GetCategoryByIdUsecase getCategoryByIdUsecase;
+
     @PostMapping
     public ResponseEntity<Void> createCategory(@RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
         var categoryMapper = new CategoryMapperImpl();
@@ -31,6 +35,14 @@ public class CategoryController {
         URI uri = uriComponentsBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Integer id) {
+        var categoryMapper = new CategoryMapperImpl();
+        var category = getCategoryByIdUsecase.execute(id);
+
+        return ResponseEntity.ok().body(categoryMapper.categoryDomainToResponse(category));
     }
 
     @GetMapping

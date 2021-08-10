@@ -1,28 +1,30 @@
 package com.nyller.springmcclean.gateway.h2database;
 
 import com.nyller.springmcclean.domain.CategoryDomain;
-import com.nyller.springmcclean.gateway.GetAllCategoriesGateway;
+import com.nyller.springmcclean.domain.exceptions.ObjectNotFoundException;
+import com.nyller.springmcclean.gateway.GetCategoryByIdGateway;
 import com.nyller.springmcclean.gateway.h2database.repository.CategoryRepository;
 import com.nyller.springmcclean.translator.CategoryMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Component
-public class GetAllCategoriesGatewayImpl implements GetAllCategoriesGateway {
+public class GetCategoryByIdGatewayImpl implements GetCategoryByIdGateway {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<CategoryDomain> execute() {
+    public Optional<CategoryDomain> execute(Integer id) {
         var categoryMapper = new CategoryMapperImpl();
-        var categories = categoryRepository.findAll();
+        var category = categoryRepository.findById(id);
 
-        return categories.stream()
-                .map(categoryMapper::categoryDatabaseToDomain)
-                .collect(Collectors.toList());
+        if (category.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(categoryMapper.categoryDatabaseToDomain(category.get()));
     }
 }
