@@ -6,17 +6,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Builder
-public class CategoryDomain implements Serializable {
+public class ProductDomain implements Serializable {
 
     private Integer id;
     private String name;
+    private Double price;
 
-    public CategoryDomain() {
+    public ProductDomain() {
     }
 
-    public CategoryDomain(Integer id, String name) {
+    public ProductDomain(Integer id, String name, Double price) {
         this.id = id;
         this.name = name;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -35,11 +37,19 @@ public class CategoryDomain implements Serializable {
         this.name = name;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoryDomain that = (CategoryDomain) o;
+        ProductDomain that = (ProductDomain) o;
         return Objects.equals(id, that.id);
     }
 

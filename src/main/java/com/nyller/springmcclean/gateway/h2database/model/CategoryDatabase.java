@@ -1,13 +1,15 @@
 package com.nyller.springmcclean.gateway.h2database.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Builder;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "categories")
+@Builder
 public class CategoryDatabase implements Serializable {
 
     @Id
@@ -15,12 +17,21 @@ public class CategoryDatabase implements Serializable {
     private Integer id;
     private String name;
 
+    @ManyToMany(mappedBy = "categories")
+    private List<ProductDatabase> products = new ArrayList<>();
+
     public CategoryDatabase() {
     }
 
     public CategoryDatabase(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public CategoryDatabase(Integer id, String name, List<ProductDatabase> products) {
+        this.id = id;
+        this.name = name;
+        this.products = products;
     }
 
     public Integer getId() {
@@ -37,6 +48,14 @@ public class CategoryDatabase implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ProductDatabase> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductDatabase> products) {
+        this.products = products;
     }
 
     @Override
