@@ -4,6 +4,7 @@ import com.nyller.springmcclean.controller.model.ProductRequest;
 import com.nyller.springmcclean.controller.model.ProductResponse;
 import com.nyller.springmcclean.translator.ProductMapperImpl;
 import com.nyller.springmcclean.usecase.CreateProductUsecase;
+import com.nyller.springmcclean.usecase.GetAllProductsUsecase;
 import com.nyller.springmcclean.usecase.GetProductByIdUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -21,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private GetProductByIdUsecase getProductByIdUsecase;
+
+    @Autowired
+    private GetAllProductsUsecase getAllProductsUsecase;
 
     @PostMapping
     public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
@@ -38,5 +44,15 @@ public class ProductController {
         var product = getProductByIdUsecase.execute(id);
 
         return ResponseEntity.ok().body(productMapper.productDomainToResponse(product));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        var productMapper = new ProductMapperImpl();
+        var product = getAllProductsUsecase.execute();
+
+        return ResponseEntity.ok().body(product.stream()
+                .map(productMapper::productDomainToResponse)
+                .collect(Collectors.toList()));
     }
 }

@@ -1,5 +1,7 @@
 package com.nyller.springmcclean.controller.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ public class ProductResponse implements Serializable {
     private Integer id;
     private String name;
     private Double price;
+    @JsonIgnore
     private List<CategoryResponse> categories = new ArrayList<>();
 
     public ProductResponse() {
