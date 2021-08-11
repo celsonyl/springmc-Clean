@@ -1,5 +1,8 @@
 package com.nyller.springmcclean.controller.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +10,15 @@ import java.util.List;
 public class ProductRequest implements Serializable {
 
     private Integer id;
+
+    @NotBlank(message = "Campo nome não pode ser vazio ou nulo!")
     private String name;
+
+    @NotNull(message = "Campo preço não pode ser nulo!")
+    @PositiveOrZero
     private Double price;
+
+    @NotNull(message = "Campo categories não pode ser nulo!")
     private List<CategoryRequest> categories = new ArrayList<>();
 
     public ProductRequest() {

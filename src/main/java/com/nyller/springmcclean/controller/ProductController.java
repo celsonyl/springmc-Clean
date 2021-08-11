@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/product")
 public class ProductController {
@@ -19,7 +21,7 @@ public class ProductController {
     private CreateProductUsecase createProductUsecase;
 
     @PostMapping
-    public ResponseEntity<Void> createProduct(@RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
         var productMapper = new ProductMapperImpl();
 
         var product = createProductUsecase.execute(productMapper.productRequestToDomain(productRequest));

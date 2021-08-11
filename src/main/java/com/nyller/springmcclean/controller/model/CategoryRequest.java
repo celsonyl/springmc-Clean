@@ -1,10 +1,13 @@
 package com.nyller.springmcclean.controller.model;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class CategoryRequest implements Serializable {
 
     private Integer id;
+
+    @NotBlank(message = "Campo não pode ser vazio ou nulo")
     private String name;
 
     public CategoryRequest() {
