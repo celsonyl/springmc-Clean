@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,7 @@ public class CategoryController {
     public ResponseEntity<Void> createCategory(@RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
         var categoryMapper = new CategoryMapperImpl();
         var category = createCategoryUsecase.execute(categoryMapper.categoryRequestToDomain(categoryRequest));
-        URI uri = uriComponentsBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();
+        var uri = uriComponentsBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
