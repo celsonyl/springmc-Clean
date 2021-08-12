@@ -2,8 +2,10 @@ package com.nyller.springmcclean;
 
 import com.nyller.springmcclean.gateway.h2database.model.CategoryDatabase;
 import com.nyller.springmcclean.gateway.h2database.model.ProductDatabase;
+import com.nyller.springmcclean.gateway.h2database.model.StateDatabase;
 import com.nyller.springmcclean.gateway.h2database.repository.CategoryRepository;
 import com.nyller.springmcclean.gateway.h2database.repository.ProductRepository;
+import com.nyller.springmcclean.gateway.h2database.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +21,8 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private StateRepository stateRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
@@ -34,5 +38,9 @@ public class SpringMcCleanApplication implements CommandLineRunner {
         ProductDatabase product1 = new ProductDatabase(null, "Computador", 1500.00, Arrays.asList(category1, category2));
         ProductDatabase product2 = new ProductDatabase(null, "Mesa", 500.00, Collections.singletonList(category1));
         productRepository.saveAll(Arrays.asList(product1, product2));
+
+        StateDatabase state1 = new StateDatabase(null, "São Paulo");
+        StateDatabase state2 = new StateDatabase(null, "Rio de Janeiro");
+        stateRepository.saveAll(Arrays.asList(state1, state2));
     }
 }
