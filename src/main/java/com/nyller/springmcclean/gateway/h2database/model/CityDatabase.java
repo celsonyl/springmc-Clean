@@ -4,36 +4,33 @@ import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "state")
+@Entity(name = "city")
 @Builder
-public class StateDatabase implements Serializable {
+public class CityDatabase implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "stateDatabase")
-    private List<CityDatabase> cityDatabases = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private StateDatabase stateDatabase;
 
-    public StateDatabase() {
+    public CityDatabase() {
     }
 
-    public StateDatabase(Integer id, String name) {
+    public CityDatabase(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public StateDatabase(Integer id, String name, List<CityDatabase> cityDatabases) {
+    public CityDatabase(Integer id, String name, StateDatabase stateDatabase) {
         this.id = id;
         this.name = name;
-        this.cityDatabases = cityDatabases;
+        this.stateDatabase = stateDatabase;
     }
 
     public Integer getId() {
@@ -52,19 +49,19 @@ public class StateDatabase implements Serializable {
         this.name = name;
     }
 
-    public List<CityDatabase> getCityDatabases() {
-        return cityDatabases;
+    public StateDatabase getStateDatabase() {
+        return stateDatabase;
     }
 
-    public void setCityDatabases(List<CityDatabase> cityDatabases) {
-        this.cityDatabases = cityDatabases;
+    public void setStateDatabase(StateDatabase stateDatabase) {
+        this.stateDatabase = stateDatabase;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StateDatabase that = (StateDatabase) o;
+        CityDatabase that = (CityDatabase) o;
         return Objects.equals(id, that.id);
     }
 

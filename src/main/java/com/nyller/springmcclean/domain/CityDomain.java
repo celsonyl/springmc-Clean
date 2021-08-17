@@ -6,17 +6,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Builder
-public class StateDomain implements Serializable {
+public class CityDomain implements Serializable {
 
     private Integer id;
     private String name;
+    private StateDomain stateDomain;
 
-    public StateDomain() {
+    public CityDomain() {
     }
 
-    public StateDomain(Integer id, String name) {
+    public CityDomain(Integer id, String name, StateDomain stateDomain) {
         this.id = id;
         this.name = name;
+        this.stateDomain = stateDomain;
     }
 
     public Integer getId() {
@@ -35,11 +37,19 @@ public class StateDomain implements Serializable {
         this.name = name;
     }
 
+    public StateDomain getStateDomain() {
+        return stateDomain;
+    }
+
+    public void setStateDomain(StateDomain stateDomain) {
+        this.stateDomain = stateDomain;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StateDomain that = (StateDomain) o;
+        CityDomain that = (CityDomain) o;
         return Objects.equals(id, that.id);
     }
 
