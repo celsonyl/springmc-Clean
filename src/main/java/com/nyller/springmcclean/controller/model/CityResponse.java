@@ -5,17 +5,19 @@ import lombok.Builder;
 import java.io.Serializable;
 
 @Builder
-public class StateResponse implements Serializable {
+public class CityResponse implements Serializable {
 
     private Integer id;
     private String name;
+    private StateResponse stateResponse;
 
-    public StateResponse() {
+    public CityResponse() {
     }
 
-    public StateResponse(Integer id, String name) {
+    public CityResponse(Integer id, String name, StateResponse stateResponse) {
         this.id = id;
         this.name = name;
+        this.stateResponse = stateResponse;
     }
 
     public Integer getId() {
@@ -32,5 +34,13 @@ public class StateResponse implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public StateResponse getStateResponse() {
+        return stateResponse;
+    }
+
+    public void setStateResponse(StateResponse stateResponse) {
+        this.stateResponse = stateResponse;
     }
 }

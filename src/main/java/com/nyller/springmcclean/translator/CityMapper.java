@@ -1,6 +1,8 @@
 package com.nyller.springmcclean.translator;
 
 import com.nyller.springmcclean.controller.model.CityRequest;
+import com.nyller.springmcclean.controller.model.CityResponse;
+import com.nyller.springmcclean.controller.model.StateResponse;
 import com.nyller.springmcclean.domain.CityDomain;
 import com.nyller.springmcclean.domain.StateDomain;
 import com.nyller.springmcclean.gateway.h2database.model.CityDatabase;
@@ -44,6 +46,19 @@ public class CityMapper {
                 .id(cityRequest.getId())
                 .name(cityRequest.getName())
                 .stateDomain(stateDomain)
+                .build();
+    }
+
+    public CityResponse cityDomainToResponse(CityDomain cityDomain) {
+        var stateResponse = StateResponse.builder()
+                .id(cityDomain.getStateDomain().getId())
+                .name(cityDomain.getStateDomain().getName())
+                .build();
+
+        return CityResponse.builder()
+                .id(cityDomain.getId())
+                .name(cityDomain.getName())
+                .stateResponse(stateResponse)
                 .build();
     }
 }
