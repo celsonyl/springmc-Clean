@@ -1,9 +1,11 @@
 package com.nyller.springmcclean;
 
 import com.nyller.springmcclean.gateway.h2database.model.CategoryDatabase;
+import com.nyller.springmcclean.gateway.h2database.model.CityDatabase;
 import com.nyller.springmcclean.gateway.h2database.model.ProductDatabase;
 import com.nyller.springmcclean.gateway.h2database.model.StateDatabase;
 import com.nyller.springmcclean.gateway.h2database.repository.CategoryRepository;
+import com.nyller.springmcclean.gateway.h2database.repository.CityRepository;
 import com.nyller.springmcclean.gateway.h2database.repository.ProductRepository;
 import com.nyller.springmcclean.gateway.h2database.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     private ProductRepository productRepository;
     @Autowired
     private StateRepository stateRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
@@ -41,6 +45,12 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
         StateDatabase state1 = new StateDatabase(null, "São Paulo");
         StateDatabase state2 = new StateDatabase(null, "Rio de Janeiro");
+
+        CityDatabase city1 = new CityDatabase(null, "Iracemápolis", state1);
+        CityDatabase city2 = new CityDatabase(null, "Limeira", state1);
+        state1.setCityDatabases(Arrays.asList(city1, city2));
+
         stateRepository.saveAll(Arrays.asList(state1, state2));
+        cityRepository.saveAll(Arrays.asList(city1, city2));
     }
 }
