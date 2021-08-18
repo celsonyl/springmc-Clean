@@ -18,7 +18,7 @@ public class ClientDatabase implements Serializable {
     private String email;
     private String cpf;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ClientType clientType;
 
     @OneToMany(mappedBy = "clientDatabase")
