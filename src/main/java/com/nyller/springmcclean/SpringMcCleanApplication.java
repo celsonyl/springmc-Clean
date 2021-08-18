@@ -1,13 +1,8 @@
 package com.nyller.springmcclean;
 
-import com.nyller.springmcclean.gateway.h2database.model.CategoryDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.CityDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.ProductDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.StateDatabase;
-import com.nyller.springmcclean.gateway.h2database.repository.CategoryRepository;
-import com.nyller.springmcclean.gateway.h2database.repository.CityRepository;
-import com.nyller.springmcclean.gateway.h2database.repository.ProductRepository;
-import com.nyller.springmcclean.gateway.h2database.repository.StateRepository;
+import com.nyller.springmcclean.domain.enums.ClientType;
+import com.nyller.springmcclean.gateway.h2database.model.*;
+import com.nyller.springmcclean.gateway.h2database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
 @SpringBootApplication
 public class SpringMcCleanApplication implements CommandLineRunner {
@@ -27,13 +23,17 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     private StateRepository stateRepository;
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private AdressRepository adressRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         CategoryDatabase category1 = new CategoryDatabase(null, "Escritório");
         CategoryDatabase category2 = new CategoryDatabase(null, "Informática");
@@ -52,5 +52,14 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
         stateRepository.saveAll(Arrays.asList(state1, state2));
         cityRepository.saveAll(Arrays.asList(city1, city2));
+
+        ClientDatabase client1 = new ClientDatabase(null, "Maria", "maria@", "42545454", ClientType.PESSOAFISICA);
+        client1.setPhones(Set.of("454545", "5454"));
+
+        AddressDatabase adress1 = new AddressDatabase(null, "Rua flores", "300", "Apto 203", "Jardim", "3822024", client1, city1);
+        AddressDatabase adress2 = new AddressDatabase(null, "Avenida matos", "120", "Sala 800", "Centro", "1221214", client1, city2);
+
+        clientRepository.save(client1);
+        adressRepository.saveAll(Arrays.asList(adress1, adress2));
     }
 }
