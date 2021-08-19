@@ -1,10 +1,13 @@
 package com.nyller.springmcclean.gateway.h2database.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(name = "address")
+@Builder
 public class AddressDatabase implements Serializable {
 
     @Id

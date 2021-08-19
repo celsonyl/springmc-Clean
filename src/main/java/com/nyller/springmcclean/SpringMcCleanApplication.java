@@ -26,7 +26,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
-    private AdressRepository adressRepository;
+    private AddressRepository addressRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
@@ -60,6 +60,6 @@ public class SpringMcCleanApplication implements CommandLineRunner {
         AddressDatabase adress2 = new AddressDatabase(null, "Avenida matos", "120", "Sala 800", "Centro", "1221214", client1, city2);
 
         clientRepository.save(client1);
-        adressRepository.saveAll(Arrays.asList(adress1, adress2));
+        addressRepository.saveAll(Arrays.asList(adress1, adress2));
     }
 }

@@ -1,7 +1,10 @@
 package com.nyller.springmcclean.controller.model;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 
+@Builder
 public class CategoryResponse implements Serializable {
 
     private Integer id;

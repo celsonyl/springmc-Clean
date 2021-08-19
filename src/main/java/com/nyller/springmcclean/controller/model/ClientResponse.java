@@ -1,11 +1,13 @@
 package com.nyller.springmcclean.controller.model;
 
 import com.nyller.springmcclean.domain.enums.ClientType;
+import lombok.Builder;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 public class ClientResponse implements Serializable {
 
     private Integer id;

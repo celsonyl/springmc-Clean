@@ -1,8 +1,11 @@
 package com.nyller.springmcclean.controller.model;
 
+import lombok.Builder;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
+@Builder
 public class CategoryRequest implements Serializable {
 
     private Integer id;

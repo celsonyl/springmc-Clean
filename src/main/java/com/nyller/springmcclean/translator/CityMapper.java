@@ -11,6 +11,9 @@ import com.nyller.springmcclean.gateway.h2database.model.StateDatabase;
 public class CityMapper {
 
     public CityDomain cityDatabaseToDomain(CityDatabase cityDatabase) {
+        if (cityDatabase == null) {
+            return null;
+        }
         var stateDomain = StateDomain.builder()
                 .id(cityDatabase.getStateDatabase().getId())
                 .name(cityDatabase.getStateDatabase().getName())
@@ -24,6 +27,9 @@ public class CityMapper {
     }
 
     public CityDatabase cityDomainToDatabase(CityDomain cityDomain) {
+        if (cityDomain == null) {
+            return null;
+        }
         var stateDatabase = StateDatabase.builder()
                 .id(cityDomain.getStateDomain().getId())
                 .name(cityDomain.getStateDomain().getName())
@@ -37,6 +43,9 @@ public class CityMapper {
     }
 
     public CityDomain cityRequestToDomain(CityRequest cityRequest) {
+        if (cityRequest == null) {
+            return null;
+        }
         var stateDomain = StateDomain.builder()
                 .id(cityRequest.getStateRequest().getId())
                 .name(cityRequest.getName())
@@ -50,6 +59,9 @@ public class CityMapper {
     }
 
     public CityResponse cityDomainToResponse(CityDomain cityDomain) {
+        if (cityDomain == null) {
+            return null;
+        }
         var stateResponse = StateResponse.builder()
                 .id(cityDomain.getStateDomain().getId())
                 .name(cityDomain.getStateDomain().getName())
