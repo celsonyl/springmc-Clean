@@ -1,6 +1,7 @@
 package com.nyller.springmcclean.translator;
 
 import com.nyller.springmcclean.controller.model.ClientRequest;
+import com.nyller.springmcclean.controller.model.ClientResponse;
 import com.nyller.springmcclean.domain.ClientDomain;
 import com.nyller.springmcclean.gateway.h2database.model.ClientDatabase;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ public interface ClientMapper {
     ClientDatabase clientDomainToDatabase(ClientDomain clientDomain);
 
     ClientDomain clientRequestToDomain(ClientRequest clientRequest);
+
+    ClientResponse clientDomainToResponse(ClientDomain clientDomain);
 }
