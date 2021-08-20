@@ -123,7 +123,7 @@ public class AddressMapper {
                 .build();
     }
 
-    public AddressDomain addressDatabaseToDomainGet(AddressDatabase addressDatabase) {
+    public AddressDomain addressDatabaseToDomainGetById(AddressDatabase addressDatabase) {
         if (addressDatabase == null) {
             return null;
         }
@@ -157,6 +157,49 @@ public class AddressMapper {
                 .logradouro(addressDatabase.getLogradouro())
                 .clientDomain(clientDomain)
                 .cityDomain(cityDomain)
+                .build();
+    }
+
+    public AddressDomain addressDatabaseToDomainGetAll(AddressDatabase addressDatabase) {
+        if (addressDatabase == null) {
+            return null;
+        }
+
+        var cityDomain = CityDomain.builder()
+                .name(addressDatabase.getCityDatabase().getName())
+                .build();
+
+        var clientDomain = ClientDomain.builder()
+                .name(addressDatabase.getClientDatabase().getName())
+                .email(addressDatabase.getClientDatabase().getEmail())
+                .build();
+
+        return AddressDomain.builder()
+                .id(addressDatabase.getId())
+                .number(addressDatabase.getNumber())
+                .bairro(addressDatabase.getBairro())
+                .cep(addressDatabase.getCep())
+                .complemento(addressDatabase.getComplemento())
+                .logradouro(addressDatabase.getLogradouro())
+                .clientDomain(clientDomain)
+                .cityDomain(cityDomain)
+                .build();
+    }
+
+    public AddressResponseGetAll addressDomainToResponseGetAll(AddressDomain addressDomain) {
+        if (addressDomain == null) {
+            return null;
+        }
+
+        return AddressResponseGetAll.builder()
+                .id(addressDomain.getId())
+                .cep(addressDomain.getCep())
+                .bairro(addressDomain.getBairro())
+                .complemento(addressDomain.getComplemento())
+                .logradouro(addressDomain.getLogradouro())
+                .number(addressDomain.getNumber())
+                .cityName(addressDomain.getCityDomain().getName())
+                .clientName(addressDomain.getClientDomain().getName())
                 .build();
     }
 }

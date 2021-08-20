@@ -23,6 +23,6 @@ public class GetAddressByIdGatewayImpl implements GetAddressByIdGateway {
             return Optional.empty();
         }
 
-        return Optional.of(addressMapper.addressDatabaseToDomainGet(address.get()));
+        return Optional.of(addressMapper.addressDatabaseToDomainGetById(address.get()));
     }
 }
