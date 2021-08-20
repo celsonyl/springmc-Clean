@@ -2,8 +2,10 @@ package com.nyller.springmcclean.gateway.h2database.model;
 
 import com.nyller.springmcclean.domain.enums.ClientType;
 import lombok.Builder;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,7 +17,13 @@ public class ClientDatabase implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @Column(unique = true)
+    @Email
     private String email;
+
+    @Column(unique = true)
+    @CPF
     private String cpf;
 
     @Enumerated(EnumType.STRING)

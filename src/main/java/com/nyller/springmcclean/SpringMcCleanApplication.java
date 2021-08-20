@@ -33,7 +33,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws Exception {
 
         CategoryDatabase category1 = new CategoryDatabase(null, "Escritório");
         CategoryDatabase category2 = new CategoryDatabase(null, "Informática");
@@ -53,7 +53,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
         stateRepository.saveAll(Arrays.asList(state1, state2));
         cityRepository.saveAll(Arrays.asList(city1, city2));
 
-        ClientDatabase client1 = new ClientDatabase(null, "Maria", "maria@", "42545454", ClientType.PESSOAFISICA);
+        ClientDatabase client1 = new ClientDatabase(null, "Maria", "maria@hotmail.com", "41649716818", ClientType.PESSOAFISICA);
         client1.setPhones(Set.of("454545", "5454"));
 
         AddressDatabase adress1 = new AddressDatabase(null, "Rua flores", "300", "Apto 203", "Jardim", "3822024", client1, city1);
