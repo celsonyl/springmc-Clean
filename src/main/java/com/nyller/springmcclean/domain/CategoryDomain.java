@@ -3,6 +3,8 @@ package com.nyller.springmcclean.domain;
 import lombok.Builder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -10,13 +12,15 @@ public class CategoryDomain implements Serializable {
 
     private Integer id;
     private String name;
+    private List<ProductDomain> productDomainList = new ArrayList<>();
 
     public CategoryDomain() {
     }
 
-    public CategoryDomain(Integer id, String name) {
+    public CategoryDomain(Integer id, String name, List<ProductDomain> productDomainList) {
         this.id = id;
         this.name = name;
+        this.productDomainList = productDomainList;
     }
 
     public Integer getId() {
@@ -33,6 +37,14 @@ public class CategoryDomain implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ProductDomain> getProductDomainList() {
+        return productDomainList;
+    }
+
+    public void setProductDomainList(List<ProductDomain> productDomainList) {
+        this.productDomainList = productDomainList;
     }
 
     @Override

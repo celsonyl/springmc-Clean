@@ -2,7 +2,7 @@ package com.nyller.springmcclean.controller;
 
 import com.nyller.springmcclean.controller.model.CategoryRequest;
 import com.nyller.springmcclean.controller.model.CategoryResponse;
-import com.nyller.springmcclean.translator.CategoryMapperImpl;
+import com.nyller.springmcclean.translator.CategoryMapper;
 import com.nyller.springmcclean.usecase.CreateCategoryUsecase;
 import com.nyller.springmcclean.usecase.GetAllCategoriesUsecase;
 import com.nyller.springmcclean.usecase.GetCategoryByIdUsecase;
@@ -30,7 +30,7 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
-        var categoryMapper = new CategoryMapperImpl();
+        var categoryMapper = new CategoryMapper();
         var category = createCategoryUsecase.execute(categoryMapper.categoryRequestToDomain(categoryRequest));
         var uri = uriComponentsBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();
 
@@ -39,7 +39,7 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Integer id) {
-        var categoryMapper = new CategoryMapperImpl();
+        var categoryMapper = new CategoryMapper();
         var category = getCategoryByIdUsecase.execute(id);
 
         return ResponseEntity.ok().body(categoryMapper.categoryDomainToResponse(category));
@@ -47,7 +47,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<CategoryResponse>> listCategories() {
-        var categoryMapper = new CategoryMapperImpl();
+        var categoryMapper = new CategoryMapper();
         var categories = getAllCategoriesUsecase.execute();
 
         return ResponseEntity.ok().body(categories.stream()

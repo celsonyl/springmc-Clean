@@ -18,11 +18,11 @@ public class GetAllAdressGatewayImpl implements GetAllAdressGateway {
 
     @Override
     public List<AddressDomain> execute() {
-        var adressMapper = new AddressMapper();
+        var addressMapper = new AddressMapper();
         var address = addressRepository.findAll();
 
         return address.stream()
-                .map(adressMapper::addressDatabaseToDomainGetAll)
+                .map(addressMapper::addressDatabaseToDomainGetAll)
                 .collect(Collectors.toList());
     }
 }

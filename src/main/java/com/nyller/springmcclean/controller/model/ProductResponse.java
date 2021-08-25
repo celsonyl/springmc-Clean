@@ -1,11 +1,13 @@
 package com.nyller.springmcclean.controller.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 public class ProductResponse implements Serializable {
 
     private Integer id;
