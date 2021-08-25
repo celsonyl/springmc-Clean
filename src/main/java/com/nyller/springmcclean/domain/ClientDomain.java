@@ -4,7 +4,9 @@ import com.nyller.springmcclean.domain.enums.ClientType;
 import lombok.Builder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -16,17 +18,19 @@ public class ClientDomain implements Serializable {
     private ClientType clientType;
     private String cpf;
     private Set<String> phones = new HashSet<>();
+    private List<AddressDomain> addressDomains = new ArrayList<>();
 
     public ClientDomain() {
     }
 
-    public ClientDomain(Integer id, String name, String email, ClientType clientType, String cpf, Set<String> phones) {
+    public ClientDomain(Integer id, String name, String email, ClientType clientType, String cpf, Set<String> phones, List<AddressDomain> addressDomains) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.clientType = clientType;
         this.cpf = cpf;
         this.phones = phones;
+        this.addressDomains = addressDomains;
     }
 
     public Integer getId() {
@@ -75,5 +79,13 @@ public class ClientDomain implements Serializable {
 
     public void setPhones(Set<String> phones) {
         this.phones = phones;
+    }
+
+    public List<AddressDomain> getAddressDomains() {
+        return addressDomains;
+    }
+
+    public void setAddressDomains(List<AddressDomain> addressDomains) {
+        this.addressDomains = addressDomains;
     }
 }

@@ -34,7 +34,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
+        
         CategoryDatabase category1 = new CategoryDatabase(null, "Escritório");
         CategoryDatabase category2 = new CategoryDatabase(null, "Informática");
         categoryRepository.saveAll(Arrays.asList(category1, category2));
