@@ -1,5 +1,6 @@
 package com.nyller.springmcclean.gateway.h2database;
 
+import com.nyller.springmcclean.controller.translator.ClientTranslator;
 import com.nyller.springmcclean.domain.ClientDomain;
 import com.nyller.springmcclean.gateway.GetAllClientsGateway;
 import com.nyller.springmcclean.gateway.h2database.repository.ClientRepository;
@@ -18,11 +19,11 @@ public class GetAllClientsGatewayImpl implements GetAllClientsGateway {
 
     @Override
     public List<ClientDomain> execute() {
-        var clientMapper = new ClientMapperImpl();
+        var clientTranslator = new ClientTranslator();
         var clients = clientRepository.findAll();
 
         return clients.stream()
-                .map(clientMapper::clientDatabaseToDomain)
+                .map(clientTranslator::clientDatabaseToDomain)
                 .collect(Collectors.toList());
     }
 }

@@ -105,6 +105,7 @@ public class AddressMapper {
 
         var clientResponse = ClientResponse.builder()
                 .id(addressDomain.getClientDomain().getId())
+                .cpf(addressDomain.getClientDomain().getCpf())
                 .email(addressDomain.getClientDomain().getEmail())
                 .name(addressDomain.getClientDomain().getName())
                 .phones(addressDomain.getClientDomain().getPhones())

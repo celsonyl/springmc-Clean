@@ -46,11 +46,11 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<ClientResponse>> getAllClients() {
-        var clientMapper = new ClientMapperImpl();
+        var clientTranslator = new ClientTranslator();
         var client = getAllClientsUsecase.execut();
 
         return ResponseEntity.ok().body(client.stream()
-                .map(clientMapper::clientDomainToResponse)
+                .map(clientTranslator::clientDomainToResponse)
                 .collect(Collectors.toList()));
     }
 }
