@@ -1,5 +1,6 @@
 package com.nyller.springmcclean.controller.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class AddressResponseGetAll implements Serializable {
     private String complemento;
     private String bairro;
     private String cep;
+    @JsonIgnore
     private String clientName;
     private String cityName;
 

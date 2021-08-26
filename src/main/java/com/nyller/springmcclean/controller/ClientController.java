@@ -2,6 +2,7 @@ package com.nyller.springmcclean.controller;
 
 import com.nyller.springmcclean.controller.model.ClientRequest;
 import com.nyller.springmcclean.controller.model.ClientResponse;
+import com.nyller.springmcclean.controller.translator.ClientTranslator;
 import com.nyller.springmcclean.translator.ClientMapperImpl;
 import com.nyller.springmcclean.usecase.CreateClientUsecase;
 import com.nyller.springmcclean.usecase.GetAllClientsUsecase;
@@ -37,10 +38,10 @@ public class ClientController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClientResponse> getClientById(@PathVariable Integer id) {
-        var clientMapper = new ClientMapperImpl();
+        var clientTranslator = new ClientTranslator();
         var client = getClientByIdUsecase.execute(id);
 
-        return ResponseEntity.ok().body(clientMapper.clientDomainToResponse(client));
+        return ResponseEntity.ok().body(clientTranslator.clientDomainToResponse(client));
     }
 
     @GetMapping

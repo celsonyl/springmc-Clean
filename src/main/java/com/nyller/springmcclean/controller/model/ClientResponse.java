@@ -5,6 +5,7 @@ import lombok.Builder;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -13,18 +14,22 @@ public class ClientResponse implements Serializable {
     private Integer id;
     private String name;
     private String email;
+    private String cpf;
     private ClientType clientType;
     private Set<String> phones = new HashSet<>();
+    private List<AddressResponseGetAll> address;
 
     public ClientResponse() {
     }
 
-    public ClientResponse(Integer id, String name, String email, ClientType clientType, Set<String> phones) {
+    public ClientResponse(Integer id, String name, String email, String cpf, ClientType clientType, Set<String> phones, List<AddressResponseGetAll> address) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.cpf = cpf;
         this.clientType = clientType;
         this.phones = phones;
+        this.address = address;
     }
 
     public Integer getId() {
@@ -51,6 +56,14 @@ public class ClientResponse implements Serializable {
         this.email = email;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public ClientType getClientType() {
         return clientType;
     }
@@ -65,5 +78,13 @@ public class ClientResponse implements Serializable {
 
     public void setPhones(Set<String> phones) {
         this.phones = phones;
+    }
+
+    public List<AddressResponseGetAll> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<AddressResponseGetAll> address) {
+        this.address = address;
     }
 }
