@@ -34,7 +34,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        
+
         CategoryDatabase category1 = new CategoryDatabase(null, "Escritório");
         CategoryDatabase category2 = new CategoryDatabase(null, "Informática");
         categoryRepository.saveAll(Arrays.asList(category1, category2));
@@ -54,12 +54,17 @@ public class SpringMcCleanApplication implements CommandLineRunner {
         cityRepository.saveAll(Arrays.asList(city1, city2));
 
         ClientDatabase client1 = new ClientDatabase(null, "Maria", "maria@hotmail.com", "41649716818", ClientType.PESSOAFISICA);
+        ClientDatabase client2 = new ClientDatabase(null, "Celso", "celsonyl@hotmail.com", "465.009.410-04", ClientType.PESSOAFISICA);
         client1.setPhones(Set.of("454545", "5454"));
+        client2.setPhones(Set.of("121212", "5453232124"));
 
         AddressDatabase address1 = new AddressDatabase(null, "Rua flores", "300", "Apto 203", "Jardim", "3822024", client1, city1);
         AddressDatabase address2 = new AddressDatabase(null, "Avenida matos", "120", "Sala 800", "Centro", "1221214", client1, city2);
+        AddressDatabase address3 = new AddressDatabase(null, "Teste matos", "1220", "Quarto 800", "Centro Avenida", "114", client2, city2);
 
-        clientRepository.save(client1);
-        addressRepository.saveAll(Arrays.asList(address1, address2));
+        client1.setAddressDatabase(Arrays.asList(address1, address2));
+        client2.setAddressDatabase(Collections.singletonList(address3));
+        clientRepository.saveAll(Arrays.asList(client1,client2));
+        addressRepository.saveAll(Arrays.asList(address1, address2,address3));
     }
 }
