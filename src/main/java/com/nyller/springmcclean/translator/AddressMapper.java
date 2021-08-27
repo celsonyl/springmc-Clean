@@ -103,7 +103,7 @@ public class AddressMapper {
                 .stateResponse(stateResponse)
                 .build();
 
-        var clientResponse = ClientResponse.builder()
+        var clientResponse = ClientResponseAddress.builder()
                 .id(addressDomain.getClientDomain().getId())
                 .cpf(addressDomain.getClientDomain().getCpf())
                 .email(addressDomain.getClientDomain().getEmail())

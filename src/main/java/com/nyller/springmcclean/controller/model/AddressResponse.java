@@ -14,14 +14,13 @@ public class AddressResponse implements Serializable {
     private String bairro;
     private String cep;
 
-    private ClientResponse clientResponse;
+    private ClientResponseAddress clientResponse;
     private CityResponse cityResponse;
 
     public AddressResponse() {
     }
 
-    public AddressResponse(Integer id, String logradouro, String number,
-                           String complemento, String bairro, String cep, ClientResponse clientResponse, CityResponse cityResponse) {
+    public AddressResponse(Integer id, String logradouro, String number, String complemento, String bairro, String cep, ClientResponseAddress clientResponse, CityResponse cityResponse) {
         this.id = id;
         this.logradouro = logradouro;
         this.number = number;
@@ -80,11 +79,11 @@ public class AddressResponse implements Serializable {
         this.cep = cep;
     }
 
-    public ClientResponse getClientResponse() {
+    public ClientResponseAddress getClientResponse() {
         return clientResponse;
     }
 
-    public void setClientResponse(ClientResponse clientResponse) {
+    public void setClientResponse(ClientResponseAddress clientResponse) {
         this.clientResponse = clientResponse;
     }
 
