@@ -5,11 +5,8 @@ public enum ClientType {
     PESSOAFISICA(1, "Pessoa Física"),
     PESSOAJURIDICA(2, "Pessoa Jurídica");
 
-    private Integer cod;
-    private String desc;
-
-    ClientType() {
-    }
+    private final Integer cod;
+    private final String desc;
 
     ClientType(Integer cod, String desc) {
         this.cod = cod;

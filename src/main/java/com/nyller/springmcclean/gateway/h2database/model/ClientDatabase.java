@@ -26,7 +26,7 @@ public class ClientDatabase implements Serializable {
     @CPF
     private String cpf;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ClientType clientType;
 
     @OneToMany(mappedBy = "clientDatabase")
@@ -35,6 +35,9 @@ public class ClientDatabase implements Serializable {
     @ElementCollection
     @CollectionTable(name = "phones")
     private Set<String> phones = new HashSet<>();
+
+    @OneToMany(mappedBy = "clientDatabase")
+    private List<OrderDatabase> orderDatabaseList = new ArrayList<>();
 
     public ClientDatabase() {
     }
@@ -47,7 +50,8 @@ public class ClientDatabase implements Serializable {
         this.clientType = clientType;
     }
 
-    public ClientDatabase(Integer id, String name, String email, String cpf, ClientType clientType, List<AddressDatabase> addressDatabase, Set<String> phones) {
+    public ClientDatabase(Integer id, String name, String email, String cpf, ClientType clientType, List<AddressDatabase> addressDatabase,
+                          Set<String> phones,List<OrderDatabase> orderDatabaseList) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,6 +59,7 @@ public class ClientDatabase implements Serializable {
         this.clientType = clientType;
         this.addressDatabase = addressDatabase;
         this.phones = phones;
+        this.orderDatabaseList = orderDatabaseList;
     }
 
     public Integer getId() {
@@ -111,6 +116,14 @@ public class ClientDatabase implements Serializable {
 
     public void setPhones(Set<String> phones) {
         this.phones = phones;
+    }
+
+    public List<OrderDatabase> getOrderDatabaseList() {
+        return orderDatabaseList;
+    }
+
+    public void setOrderDatabaseList(List<OrderDatabase> orderDatabaseList) {
+        this.orderDatabaseList = orderDatabaseList;
     }
 
     @Override
