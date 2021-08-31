@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity(name = "payments")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class PaymentDatabase implements Serializable {
+public abstract class PaymentDatabase implements Serializable {
 
     @Id
     private Integer id;

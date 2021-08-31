@@ -35,6 +35,13 @@ public class OrderDatabase implements Serializable {
         this.addressDatabase = addressDatabase;
     }
 
+    public OrderDatabase(Integer id, Date instant, ClientDatabase clientDatabase, AddressDatabase addressDatabase) {
+        this.id = id;
+        this.instant = instant;
+        this.clientDatabase = clientDatabase;
+        this.addressDatabase = addressDatabase;
+    }
+
     public Integer getId() {
         return id;
     }

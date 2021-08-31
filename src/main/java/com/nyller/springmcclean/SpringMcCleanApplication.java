@@ -1,6 +1,9 @@
 package com.nyller.springmcclean;
 
+import com.nyller.springmcclean.domain.PaymentByCard;
+import com.nyller.springmcclean.domain.PaymentWithBankSlip;
 import com.nyller.springmcclean.domain.enums.ClientType;
+import com.nyller.springmcclean.domain.enums.PaymentStatus;
 import com.nyller.springmcclean.gateway.h2database.model.*;
 import com.nyller.springmcclean.gateway.h2database.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +11,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Set;
 
 @SpringBootApplication
@@ -27,13 +33,17 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     private ClientRepository clientRepository;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private PaymentRepository paymentRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws ParseException {
 
         CategoryDatabase category1 = new CategoryDatabase(null, "Escritório");
         CategoryDatabase category2 = new CategoryDatabase(null, "Informática");
@@ -64,7 +74,21 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
         client1.setAddressDatabase(Arrays.asList(address1, address2));
         client2.setAddressDatabase(Collections.singletonList(address3));
-        clientRepository.saveAll(Arrays.asList(client1,client2));
-        addressRepository.saveAll(Arrays.asList(address1, address2,address3));
+        clientRepository.saveAll(Arrays.asList(client1, client2));
+        addressRepository.saveAll(Arrays.asList(address1, address2, address3));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        OrderDatabase order1 = new OrderDatabase(null, dateFormat.parse("30/09/2021 13:23"), client1, address1);
+        OrderDatabase order2 = new OrderDatabase(null, dateFormat.parse("10/12/2021 08:23"), client1, address2);
+
+        PaymentDatabase payment1 = new PaymentByCard(null, PaymentStatus.QUITED, order1, 6);
+        order1.setPaymentDatabase(payment1);
+        PaymentDatabase payment2 = new PaymentWithBankSlip(null, PaymentStatus.PENDENT, order2, dateFormat.parse("13/12/2021 00:00"), null);
+        order2.setPaymentDatabase(payment2);
+
+        client1.getOrderDatabaseList().addAll(Arrays.asList(order1, order2));
+
+        orderRepository.saveAll(Arrays.asList(order1, order2));
+        paymentRepository.saveAll(Arrays.asList(payment1, payment2));
     }
 }

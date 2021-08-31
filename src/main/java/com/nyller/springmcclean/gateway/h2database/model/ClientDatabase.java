@@ -26,7 +26,7 @@ public class ClientDatabase implements Serializable {
     @CPF
     private String cpf;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ClientType clientType;
 
     @OneToMany(mappedBy = "clientDatabase")
@@ -51,7 +51,7 @@ public class ClientDatabase implements Serializable {
     }
 
     public ClientDatabase(Integer id, String name, String email, String cpf, ClientType clientType, List<AddressDatabase> addressDatabase,
-                          Set<String> phones,List<OrderDatabase> orderDatabaseList) {
+                          Set<String> phones, List<OrderDatabase> orderDatabaseList) {
         this.id = id;
         this.name = name;
         this.email = email;
