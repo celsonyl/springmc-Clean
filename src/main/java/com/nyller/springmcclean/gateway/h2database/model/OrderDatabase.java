@@ -1,16 +1,22 @@
 package com.nyller.springmcclean.gateway.h2database.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity(name = "orders")
+@Builder
 public class OrderDatabase implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm",timezone = "GMT-3")
     private Date instant;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderDatabase")
