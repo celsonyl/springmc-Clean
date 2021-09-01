@@ -16,6 +16,7 @@ public abstract class PaymentDatabase implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @OneToOne
     @JoinColumn(name = "order_id")
     @MapsId

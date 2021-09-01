@@ -1,7 +1,7 @@
 package com.nyller.springmcclean;
 
-import com.nyller.springmcclean.domain.PaymentByCard;
-import com.nyller.springmcclean.domain.PaymentWithBankSlip;
+import com.nyller.springmcclean.gateway.h2database.model.PaymentByCardDatabase;
+import com.nyller.springmcclean.gateway.h2database.model.PaymentWithBankSlipDatabase;
 import com.nyller.springmcclean.domain.enums.ClientType;
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
 import com.nyller.springmcclean.gateway.h2database.model.*;
@@ -15,7 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Locale;
 import java.util.Set;
 
 @SpringBootApplication
@@ -81,9 +80,9 @@ public class SpringMcCleanApplication implements CommandLineRunner {
         OrderDatabase order1 = new OrderDatabase(null, dateFormat.parse("30/09/2021 13:23"), client1, address1);
         OrderDatabase order2 = new OrderDatabase(null, dateFormat.parse("10/12/2021 08:23"), client1, address2);
 
-        PaymentDatabase payment1 = new PaymentByCard(null, PaymentStatus.QUITED, order1, 6);
+        PaymentDatabase payment1 = new PaymentByCardDatabase(null, PaymentStatus.QUITED, order1, 6);
         order1.setPaymentDatabase(payment1);
-        PaymentDatabase payment2 = new PaymentWithBankSlip(null, PaymentStatus.PENDENT, order2, dateFormat.parse("13/12/2021 00:00"), null);
+        PaymentDatabase payment2 = new PaymentWithBankSlipDatabase(null, PaymentStatus.PENDENT, order2, dateFormat.parse("13/12/2021 00:00"), null);
         order2.setPaymentDatabase(payment2);
 
         client1.getOrderDatabaseList().addAll(Arrays.asList(order1, order2));

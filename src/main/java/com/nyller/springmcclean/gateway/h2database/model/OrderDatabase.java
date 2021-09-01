@@ -16,10 +16,12 @@ public class OrderDatabase implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderDatabase")
     private PaymentDatabase paymentDatabase;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientDatabase clientDatabase;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToOne
     @JoinColumn(name = "address_id")
     private AddressDatabase addressDatabase;
