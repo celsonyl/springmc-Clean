@@ -1,4 +1,4 @@
-package com.nyller.springmcclean.domain;
+package com.nyller.springmcclean.controller.model;
 
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
 import lombok.Builder;
@@ -6,19 +6,19 @@ import lombok.Builder;
 import java.io.Serializable;
 
 @Builder
-public class PaymentDomain implements Serializable {
+public class PaymentResponse implements Serializable {
 
     private Integer id;
-    private OrderDomain orderId;
     private PaymentStatus paymentStatus;
+    private OrderResponse orderResponse;
 
-    public PaymentDomain() {
+    public PaymentResponse() {
     }
 
-    public PaymentDomain(Integer id, OrderDomain orderId, PaymentStatus paymentStatus) {
+    public PaymentResponse(Integer id, PaymentStatus paymentStatus, OrderResponse orderResponse) {
         this.id = id;
-        this.orderId = orderId;
         this.paymentStatus = paymentStatus;
+        this.orderResponse = orderResponse;
     }
 
     public Integer getId() {
@@ -29,19 +29,19 @@ public class PaymentDomain implements Serializable {
         this.id = id;
     }
 
-    public OrderDomain getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(OrderDomain orderId) {
-        this.orderId = orderId;
-    }
-
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public OrderResponse getOrderResponse() {
+        return orderResponse;
+    }
+
+    public void setOrderResponse(OrderResponse orderResponse) {
+        this.orderResponse = orderResponse;
     }
 }

@@ -1,6 +1,7 @@
 package com.nyller.springmcclean.gateway.h2database.model;
 
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,7 +9,8 @@ import java.util.Objects;
 
 @Entity(name = "payments")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class PaymentDatabase implements Serializable {
+@Builder
+public class PaymentDatabase implements Serializable {
 
     @Id
     private Integer id;
