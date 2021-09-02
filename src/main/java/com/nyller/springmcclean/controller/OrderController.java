@@ -1,14 +1,13 @@
 package com.nyller.springmcclean.controller;
 
 import com.nyller.springmcclean.controller.model.OrderRequest;
+import com.nyller.springmcclean.controller.model.OrderResponse;
 import com.nyller.springmcclean.translator.OrderMapper;
 import com.nyller.springmcclean.usecase.CreateOrderUsecase;
+import com.nyller.springmcclean.usecase.GetOrderByIdUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -20,6 +19,9 @@ public class OrderController {
     @Autowired
     private CreateOrderUsecase createOrderUsecase;
 
+    @Autowired
+    private GetOrderByIdUsecase getOrderByIdUsecase;
+
     @PostMapping
     public ResponseEntity<Void> createOrder(@Valid @RequestBody OrderRequest orderRequest, UriComponentsBuilder uriComponentsBuilder) {
         var orderMapper = new OrderMapper();
@@ -29,4 +31,11 @@ public class OrderController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<OrderResponse> getOrderById(@PathVariable Integer id) {
+        var orderMapper = new OrderMapper();
+        var order = getOrderByIdUsecase.execute(id);
+
+        return ResponseEntity.ok().body(orderMapper.orderDomainToResponse(order));
+    }
 }

@@ -16,7 +16,7 @@ public class OrderDomain implements Serializable {
     public OrderDomain() {
     }
 
-    public OrderDomain(Integer id, Date instant,ClientDomain clientDomain, AddressDomain addressDomain) {
+    public OrderDomain(Integer id, Date instant, ClientDomain clientDomain, AddressDomain addressDomain) {
         this.id = id;
         this.instant = instant;
         this.clientDomain = clientDomain;
