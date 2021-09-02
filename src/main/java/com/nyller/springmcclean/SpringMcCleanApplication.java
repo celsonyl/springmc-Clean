@@ -82,7 +82,7 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
         PaymentDatabase payment1 = new PaymentByCardDatabase(null, PaymentStatus.QUITED, order1, 6);
         order1.setPaymentDatabase(payment1);
-        PaymentDatabase payment2 = new PaymentWithBankSlipDatabase(null, PaymentStatus.PENDENT, order2, dateFormat.parse("13/12/2021 00:00"), null);
+        PaymentDatabase payment2 = new PaymentWithBankSlipDatabase(null, PaymentStatus.PENDENT, order2, dateFormat.parse("13/12/2021 00:00"), dateFormat.parse("00/00/0000 00:00"));
         order2.setPaymentDatabase(payment2);
 
         client1.getOrderDatabaseList().addAll(Arrays.asList(order1, order2));

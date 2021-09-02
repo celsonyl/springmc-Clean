@@ -1,5 +1,6 @@
 package com.nyller.springmcclean.gateway.h2database.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
 
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import java.util.Date;
 @Entity
 public class PaymentWithBankSlipDatabase extends PaymentDatabase implements Serializable {
 
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm", timezone = "GMT-3")
     private Date expirationDate;
+
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm", timezone = "GMT-3")
     private Date paymentDate;
 
     public PaymentWithBankSlipDatabase() {
