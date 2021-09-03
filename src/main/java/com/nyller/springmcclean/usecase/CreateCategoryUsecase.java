@@ -1,7 +1,7 @@
 package com.nyller.springmcclean.usecase;
 
 import com.nyller.springmcclean.domain.CategoryDomain;
-import com.nyller.springmcclean.domain.exceptions.DataIntgrityViolation;
+import com.nyller.springmcclean.domain.exceptions.DataIntegrityException;
 import com.nyller.springmcclean.gateway.CreateCategoryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,7 +17,7 @@ public class CreateCategoryUsecase {
         try {
             return createCategoryGateway.execute(categoryDomain);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntgrityViolation("Já existe uma categoria com esse nome! "+ categoryDomain.getName());
+            throw new DataIntegrityException("Já existe uma categoria com esse nome! " + categoryDomain.getName());
         }
     }
 }

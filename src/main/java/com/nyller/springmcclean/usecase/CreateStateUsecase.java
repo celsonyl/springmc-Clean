@@ -1,7 +1,7 @@
 package com.nyller.springmcclean.usecase;
 
 import com.nyller.springmcclean.domain.StateDomain;
-import com.nyller.springmcclean.domain.exceptions.DataIntgrityViolation;
+import com.nyller.springmcclean.domain.exceptions.DataIntegrityException;
 import com.nyller.springmcclean.gateway.CreateStateGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,7 +17,7 @@ public class CreateStateUsecase {
         try {
             return createStateGateway.execute(stateDomain);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntgrityViolation("Este Estado já existe!" + stateDomain.getName());
+            throw new DataIntegrityException("Este Estado já existe!" + stateDomain.getName());
         }
     }
 }
