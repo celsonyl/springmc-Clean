@@ -3,6 +3,7 @@ package com.nyller.springmcclean.controller.model;
 import com.nyller.springmcclean.domain.enums.ClientType;
 import lombok.Builder;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +12,14 @@ import java.util.Set;
 public class ClientRequest implements Serializable {
 
     private Integer id;
+
+    @NotBlank(message = "Field name doesn't null or blank!")
     private String name;
+    @NotBlank(message = "Field email doesn't null or blank!")
     private String email;
+    @NotBlank(message = "Field CPF doesn't null or blank!")
     private String cpf;
+    @NotNull(message = "Field clientType doesn't null")
     private ClientType clientType;
     private Set<String> phones = new HashSet<>();
 

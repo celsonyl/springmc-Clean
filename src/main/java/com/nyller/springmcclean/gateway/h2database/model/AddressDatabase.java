@@ -19,17 +19,19 @@ public class AddressDatabase implements Serializable {
     private String bairro;
     private String cep;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientDatabase clientDatabase;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToOne
     @JoinColumn(name = "city_id")
     private CityDatabase cityDatabase;
 
     public AddressDatabase() {
     }
-    
+
     public AddressDatabase(Integer id, String logradouro, String number, String complemento,
                            String bairro, String cep, ClientDatabase clientDatabase, CityDatabase cityDatabase) {
         this.id = id;

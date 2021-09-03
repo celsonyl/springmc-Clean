@@ -2,16 +2,21 @@ package com.nyller.springmcclean.controller.model;
 
 import lombok.Builder;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Builder
 public class AddressRequest implements Serializable {
 
     private Integer id;
+    @NotBlank(message = "Field logradouro doesn't null or blank!")
     private String logradouro;
+    @NotBlank(message = "Field number doesn't null or blank!")
     private String number;
     private String complemento;
+    @NotBlank(message = "Field bairro doesn't null or blank!")
     private String bairro;
+    @NotBlank(message = "Field cep doesn't null or blank!")
     private String cep;
 
     private ClientRequest clientRequest;

@@ -19,11 +19,11 @@ public class ClientDatabase implements Serializable {
     private String name;
 
     @Column(unique = true)
-    @Email
+    @Email(message = "Invalid email")
     private String email;
 
     @Column(unique = true)
-    @CPF
+    @CPF(message = "Invalid CPF!")
     private String cpf;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +32,7 @@ public class ClientDatabase implements Serializable {
     @OneToMany(mappedBy = "clientDatabase")
     private List<AddressDatabase> addressDatabase = new ArrayList<>();
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ElementCollection
     @CollectionTable(name = "phones")
     private Set<String> phones = new HashSet<>();

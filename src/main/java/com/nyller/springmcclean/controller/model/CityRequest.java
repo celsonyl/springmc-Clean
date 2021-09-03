@@ -2,12 +2,14 @@ package com.nyller.springmcclean.controller.model;
 
 import lombok.Builder;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Builder
 public class CityRequest implements Serializable {
 
     private Integer id;
+    @NotBlank(message = "Field name doesn't null or blank!")
     private String name;
 
     private StateRequest stateRequest;
