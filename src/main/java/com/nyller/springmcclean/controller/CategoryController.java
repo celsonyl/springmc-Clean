@@ -3,10 +3,7 @@ package com.nyller.springmcclean.controller;
 import com.nyller.springmcclean.controller.model.CategoryRequest;
 import com.nyller.springmcclean.controller.model.CategoryResponse;
 import com.nyller.springmcclean.translator.CategoryMapper;
-import com.nyller.springmcclean.usecase.CreateCategoryUsecase;
-import com.nyller.springmcclean.usecase.GetAllCategoriesUsecase;
-import com.nyller.springmcclean.usecase.GetCategoryByIdUsecase;
-import com.nyller.springmcclean.usecase.UpdateCategoryUsecase;
+import com.nyller.springmcclean.usecase.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +19,14 @@ public class CategoryController {
 
     @Autowired
     private CreateCategoryUsecase createCategoryUsecase;
-
     @Autowired
     private GetAllCategoriesUsecase getAllCategoriesUsecase;
-
     @Autowired
     private GetCategoryByIdUsecase getCategoryByIdUsecase;
-
     @Autowired
     private UpdateCategoryUsecase updateCategoryUsecase;
+    @Autowired
+    private DeleteCategoryByIdUsecase deleteCategoryByIdUsecase;
 
     @PostMapping
     public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
@@ -64,5 +60,11 @@ public class CategoryController {
         return ResponseEntity.ok().body(categories.stream()
                 .map(categoryMapper::categoryDomainToResponse)
                 .collect(Collectors.toList()));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteCategoryById(@PathVariable Integer id) {
+        deleteCategoryByIdUsecase.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 }
