@@ -15,12 +15,16 @@ public class ClientRequest implements Serializable {
 
     @NotBlank(message = "Field name doesn't null or blank!")
     private String name;
+
     @NotBlank(message = "Field email doesn't null or blank!")
     private String email;
+
     @NotBlank(message = "Field CPF doesn't null or blank!")
     private String cpf;
+
     @NotNull(message = "Field clientType doesn't null")
     private ClientType clientType;
+
     private Set<String> phones = new HashSet<>();
 
     public ClientRequest() {

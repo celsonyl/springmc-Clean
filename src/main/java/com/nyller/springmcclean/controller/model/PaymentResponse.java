@@ -3,6 +3,7 @@ package com.nyller.springmcclean.controller.model;
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
 import lombok.Builder;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +12,14 @@ import java.util.Set;
 public class PaymentResponse implements Serializable {
 
     private Integer id;
+
+    @NotNull(message = "Field Payment method doesn't null!")
     private Set<String> paymentMethod = new HashSet<>();
+
+    @NotNull(message = "Field Payment Status doesn't null!")
     private PaymentStatus paymentStatus;
+
+    @NotNull(message = "Field Order doesn't null!")
     private OrderResponse orderResponse;
 
     public PaymentResponse() {

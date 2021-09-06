@@ -3,6 +3,7 @@ package com.nyller.springmcclean.controller.model;
 import lombok.Builder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Builder
@@ -19,8 +20,10 @@ public class AddressRequest implements Serializable {
     @NotBlank(message = "Field cep doesn't null or blank!")
     private String cep;
 
+    @NotNull(message = "Field Client doesn't null!")
     private ClientRequest clientRequest;
 
+    @NotNull(message = "Field City doesn't null!")
     private CityRequest cityRequest;
 
     public AddressRequest() {

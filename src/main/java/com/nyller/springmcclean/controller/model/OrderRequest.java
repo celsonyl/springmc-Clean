@@ -3,6 +3,7 @@ package com.nyller.springmcclean.controller.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +14,11 @@ public class OrderRequest implements Serializable {
 
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm", timezone = "GMT-3")
     private Date instant;
+
+    @NotNull(message = "Field Client doesn't null!")
     private ClientRequest clientRequest;
+
+    @NotNull(message = "Field Address doesn't null!")
     private AddressRequest addressRequest;
 
     public OrderRequest() {
