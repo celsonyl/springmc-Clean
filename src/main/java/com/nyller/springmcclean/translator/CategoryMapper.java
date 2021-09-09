@@ -66,18 +66,9 @@ public class CategoryMapper {
     }
 
     public CategoryResponse categoryDomainToResponse(CategoryDomain categoryDomain) {
-        var list = categoryDomain.getProductDomainList().stream()
-                .map(element -> ProductResponse.builder()
-                        .id(element.getId())
-                        .name(element.getName())
-                        .price(element.getPrice())
-                        .build())
-                .collect(Collectors.toList());
-
         return CategoryResponse.builder()
                 .id(categoryDomain.getId())
                 .name(categoryDomain.getName())
-                .productResponseList(list)
                 .build();
     }
 }

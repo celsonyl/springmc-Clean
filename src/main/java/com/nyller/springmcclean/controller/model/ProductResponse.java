@@ -1,6 +1,5 @@
 package com.nyller.springmcclean.controller.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ public class ProductResponse implements Serializable {
     private Integer id;
     private String name;
     private Double price;
-    @JsonIgnore
+
     private List<CategoryResponse> categories = new ArrayList<>();
 
     public ProductResponse() {

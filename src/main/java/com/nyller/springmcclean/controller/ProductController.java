@@ -4,6 +4,7 @@ import com.nyller.springmcclean.controller.model.ProductRequest;
 import com.nyller.springmcclean.controller.model.ProductResponse;
 import com.nyller.springmcclean.translator.ProductMapperImpl;
 import com.nyller.springmcclean.usecase.CreateProductUsecase;
+import com.nyller.springmcclean.usecase.DeleteProductByIdUsecase;
 import com.nyller.springmcclean.usecase.GetAllProductsUsecase;
 import com.nyller.springmcclean.usecase.GetProductByIdUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class ProductController {
 
     @Autowired
     private CreateProductUsecase createProductUsecase;
-
     @Autowired
     private GetProductByIdUsecase getProductByIdUsecase;
-
     @Autowired
     private GetAllProductsUsecase getAllProductsUsecase;
+    @Autowired
+    private DeleteProductByIdUsecase deleteProductByIdUsecase;
 
     @PostMapping
     public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
@@ -54,5 +55,11 @@ public class ProductController {
         return ResponseEntity.ok().body(product.stream()
                 .map(productMapper::productDomainToResponse)
                 .collect(Collectors.toList()));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer id) {
+        deleteProductByIdUsecase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }
