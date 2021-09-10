@@ -1,5 +1,6 @@
 package com.nyller.springmcclean.controller.model;
 
+import com.nyller.springmcclean.controller.handler.validation.ClientUpdate;
 import com.nyller.springmcclean.domain.enums.ClientType;
 import lombok.Builder;
 
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
+@ClientUpdate
 public class ClientUpdateRequest implements Serializable {
 
     private Integer id;

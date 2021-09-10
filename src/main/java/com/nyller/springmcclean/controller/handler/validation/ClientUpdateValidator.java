@@ -1,0 +1,39 @@
+package com.nyller.springmcclean.controller.handler.validation;
+
+import com.nyller.springmcclean.controller.handler.model.FieldMessage;
+import com.nyller.springmcclean.controller.model.ClientUpdateRequest;
+import com.nyller.springmcclean.gateway.h2database.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClientUpdateValidator implements ConstraintValidator<ClientUpdate, ClientUpdateRequest> {
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Override
+    public void initialize(ClientUpdate constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
+    }
+
+    @Override
+    public boolean isValid(ClientUpdateRequest clientUpdateRequest, ConstraintValidatorContext constraintValidatorContext) {
+        List<FieldMessage> list = new ArrayList<>();
+
+        var client = clientRepository.findByEmail(clientUpdateRequest.getEmail());
+        if (client != null) {
+            list.add(new FieldMessage("email", "Email já existente"));
+        }
+
+        for (FieldMessage field : list) {
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(field.getMessage()).addPropertyNode(field.getFieldName())
+                    .addConstraintViolation();
+        }
+        return list.isEmpty();
+    }
+}
