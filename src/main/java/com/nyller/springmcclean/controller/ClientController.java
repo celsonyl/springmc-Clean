@@ -2,11 +2,13 @@ package com.nyller.springmcclean.controller;
 
 import com.nyller.springmcclean.controller.model.ClientRequest;
 import com.nyller.springmcclean.controller.model.ClientResponse;
+import com.nyller.springmcclean.controller.model.ClientUpdateRequest;
 import com.nyller.springmcclean.controller.translator.ClientTranslator;
 import com.nyller.springmcclean.translator.ClientMapperImpl;
 import com.nyller.springmcclean.usecase.CreateClientUsecase;
 import com.nyller.springmcclean.usecase.GetAllClientsUsecase;
 import com.nyller.springmcclean.usecase.GetClientByIdUsecase;
+import com.nyller.springmcclean.usecase.UpdateClientUsecase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class ClientController {
     private GetClientByIdUsecase getClientByIdUsecase;
     @Autowired
     private GetAllClientsUsecase getAllClientsUsecase;
+    @Autowired
+    private UpdateClientUsecase updateClientUsecase;
 
     @PostMapping
     public ResponseEntity<Void> createClient(@Valid @RequestBody ClientRequest clientRequest, UriComponentsBuilder uriComponentsBuilder) {
@@ -34,6 +38,13 @@ public class ClientController {
 
         var uri = uriComponentsBuilder.path("/client/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> updateClient(@Valid @RequestBody ClientUpdateRequest clientUpdateRequest, @PathVariable Integer id) {
+        var clientMapper = new ClientMapperImpl();
+        updateClientUsecase.execute(clientMapper.clientUpdateRequestToDomain(clientUpdateRequest), id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/{id}")
