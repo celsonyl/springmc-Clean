@@ -2,7 +2,7 @@ package com.nyller.springmcclean.controller.handler.validation;
 
 import com.nyller.springmcclean.controller.handler.model.FieldMessage;
 import com.nyller.springmcclean.controller.model.ClientRequest;
-import com.nyller.springmcclean.gateway.h2database.repository.ClientRepository;
+import com.nyller.springmcclean.gateway.mysql.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

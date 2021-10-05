@@ -3,7 +3,7 @@ package com.nyller.springmcclean.translator;
 import com.nyller.springmcclean.controller.model.ClientRequest;
 import com.nyller.springmcclean.controller.model.ClientUpdateRequest;
 import com.nyller.springmcclean.domain.ClientDomain;
-import com.nyller.springmcclean.gateway.h2database.model.ClientDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.ClientDatabase;
 import org.mapstruct.Mapper;
 
 @Mapper

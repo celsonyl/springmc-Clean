@@ -5,8 +5,8 @@ import com.nyller.springmcclean.controller.model.CityResponse;
 import com.nyller.springmcclean.controller.model.StateResponse;
 import com.nyller.springmcclean.domain.CityDomain;
 import com.nyller.springmcclean.domain.StateDomain;
-import com.nyller.springmcclean.gateway.h2database.model.CityDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.StateDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.CityDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.StateDatabase;
 
 public class CityMapper {
 

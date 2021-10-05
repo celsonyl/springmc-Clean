@@ -1,11 +1,11 @@
 package com.nyller.springmcclean;
 
-import com.nyller.springmcclean.gateway.h2database.model.PaymentByCardDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.PaymentWithBankSlipDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.PaymentByCardDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.PaymentWithBankSlipDatabase;
 import com.nyller.springmcclean.domain.enums.ClientType;
 import com.nyller.springmcclean.domain.enums.PaymentStatus;
-import com.nyller.springmcclean.gateway.h2database.model.*;
-import com.nyller.springmcclean.gateway.h2database.repository.*;
+import com.nyller.springmcclean.gateway.mysql.model.*;
+import com.nyller.springmcclean.gateway.mysql.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

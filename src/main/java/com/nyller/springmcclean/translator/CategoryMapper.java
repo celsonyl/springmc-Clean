@@ -2,11 +2,10 @@ package com.nyller.springmcclean.translator;
 
 import com.nyller.springmcclean.controller.model.CategoryRequest;
 import com.nyller.springmcclean.controller.model.CategoryResponse;
-import com.nyller.springmcclean.controller.model.ProductResponse;
 import com.nyller.springmcclean.domain.CategoryDomain;
 import com.nyller.springmcclean.domain.ProductDomain;
-import com.nyller.springmcclean.gateway.h2database.model.CategoryDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.ProductDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.CategoryDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.ProductDatabase;
 
 import java.util.stream.Collectors;
 

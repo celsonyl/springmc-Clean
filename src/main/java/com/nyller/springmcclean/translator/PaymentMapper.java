@@ -6,8 +6,8 @@ import com.nyller.springmcclean.controller.model.PaymentResponse;
 import com.nyller.springmcclean.controller.translator.ClientTranslator;
 import com.nyller.springmcclean.domain.OrderDomain;
 import com.nyller.springmcclean.domain.PaymentDomain;
-import com.nyller.springmcclean.gateway.h2database.model.PaymentByCardDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.PaymentWithBankSlipDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.PaymentByCardDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.PaymentWithBankSlipDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.HashSet;

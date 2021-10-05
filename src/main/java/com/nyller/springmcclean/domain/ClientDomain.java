@@ -33,6 +33,14 @@ public class ClientDomain implements Serializable {
         this.addressDomains = addressDomains;
     }
 
+    public ClientDomain(Integer id, String name, String email, ClientType clientType, String cpf) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.clientType = clientType;
+        this.cpf = cpf;
+    }
+
     public Integer getId() {
         return id;
     }

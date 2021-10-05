@@ -2,7 +2,7 @@ package com.nyller.springmcclean.controller.translator;
 
 import com.nyller.springmcclean.controller.model.ClientResponse;
 import com.nyller.springmcclean.domain.ClientDomain;
-import com.nyller.springmcclean.gateway.h2database.model.ClientDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.ClientDatabase;
 import com.nyller.springmcclean.translator.AddressMapper;
 
 import java.util.stream.Collectors;

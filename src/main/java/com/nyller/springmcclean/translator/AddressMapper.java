@@ -5,9 +5,9 @@ import com.nyller.springmcclean.domain.AddressDomain;
 import com.nyller.springmcclean.domain.CityDomain;
 import com.nyller.springmcclean.domain.ClientDomain;
 import com.nyller.springmcclean.domain.StateDomain;
-import com.nyller.springmcclean.gateway.h2database.model.AddressDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.CityDatabase;
-import com.nyller.springmcclean.gateway.h2database.model.ClientDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.AddressDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.CityDatabase;
+import com.nyller.springmcclean.gateway.mysql.model.ClientDatabase;
 
 public class AddressMapper {
 
