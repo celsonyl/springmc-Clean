@@ -5,9 +5,7 @@ import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity(name = "product")
 @Builder
@@ -19,6 +17,7 @@ public class ProductDatabase implements Serializable {
     private String name;
     private Double price;
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToMany
     @JsonIgnore
     @JoinTable(
@@ -28,6 +27,9 @@ public class ProductDatabase implements Serializable {
     )
     private List<CategoryDatabase> categories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.productDatabase")
+    private Set<ItemOrderDatabase> itens = new HashSet<>();
+
     public ProductDatabase() {
     }
 
@@ -36,6 +38,22 @@ public class ProductDatabase implements Serializable {
         this.name = name;
         this.price = price;
         this.categories = categories;
+    }
+
+    public ProductDatabase(Integer id, String name, Double price, List<CategoryDatabase> categories, Set<ItemOrderDatabase> itens) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.categories = categories;
+        this.itens = itens;
+    }
+
+    public List<OrderDatabase> getOrderDatabases() {
+        List<OrderDatabase> list = new ArrayList<>();
+        for (ItemOrderDatabase x : itens) {
+            list.add(x.getOrder());
+        }
+        return list;
     }
 
     public Integer getId() {
@@ -68,6 +86,14 @@ public class ProductDatabase implements Serializable {
 
     public void setCategories(List<CategoryDatabase> categories) {
         this.categories = categories;
+    }
+
+    public Set<ItemOrderDatabase> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemOrderDatabase> itens) {
+        this.itens = itens;
     }
 
     @Override

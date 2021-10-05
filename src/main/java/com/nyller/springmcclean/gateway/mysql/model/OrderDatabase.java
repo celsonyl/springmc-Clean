@@ -6,7 +6,9 @@ import lombok.Builder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "orders")
 @Builder
@@ -16,7 +18,7 @@ public class OrderDatabase implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy hh:mm",timezone = "GMT-3")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm", timezone = "GMT-3")
     private Date instant;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderDatabase")
@@ -31,6 +33,9 @@ public class OrderDatabase implements Serializable {
     @ManyToOne
     @JoinColumn(name = "address_id")
     private AddressDatabase addressDatabase;
+
+    @OneToMany(mappedBy = "id.orderDatabase")
+    private Set<ItemOrderDatabase> itens = new HashSet<>();
 
     public OrderDatabase() {
     }
@@ -48,6 +53,15 @@ public class OrderDatabase implements Serializable {
         this.instant = instant;
         this.clientDatabase = clientDatabase;
         this.addressDatabase = addressDatabase;
+    }
+
+    public OrderDatabase(Integer id, Date instant, PaymentDatabase paymentDatabase, ClientDatabase clientDatabase, AddressDatabase addressDatabase, Set<ItemOrderDatabase> itens) {
+        this.id = id;
+        this.instant = instant;
+        this.paymentDatabase = paymentDatabase;
+        this.clientDatabase = clientDatabase;
+        this.addressDatabase = addressDatabase;
+        this.itens = itens;
     }
 
     public Integer getId() {
@@ -88,6 +102,14 @@ public class OrderDatabase implements Serializable {
 
     public void setAddressDatabase(AddressDatabase addressDatabase) {
         this.addressDatabase = addressDatabase;
+    }
+
+    public Set<ItemOrderDatabase> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemOrderDatabase> itens) {
+        this.itens = itens;
     }
 
     @Override
