@@ -36,6 +36,8 @@ public class SpringMcCleanApplication implements CommandLineRunner {
     private PaymentRepository paymentRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ItemOrderRepository itemOrderRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMcCleanApplication.class, args);
@@ -89,5 +91,15 @@ public class SpringMcCleanApplication implements CommandLineRunner {
 
         orderRepository.saveAll(Arrays.asList(order1, order2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
+
+        ItemOrderDatabase itemOrder1 = new ItemOrderDatabase(product1, order1, 0.0, 3, 1400.0);
+        ItemOrderDatabase itemOrder2 = new ItemOrderDatabase(product2, order2, 100.0, 10, 100.0);
+        ItemOrderDatabase itemOrder3 = new ItemOrderDatabase(product1, order2, 10.0, 1, 1000.0);
+        product1.setItens(Set.of(itemOrder1, itemOrder3));
+        product2.setItens(Set.of(itemOrder2));
+        order1.setItens(Set.of(itemOrder1));
+        order2.setItens(Set.of(itemOrder2, itemOrder3));
+        
+        itemOrderRepository.saveAll(Arrays.asList(itemOrder1, itemOrder2, itemOrder3));
     }
 }
